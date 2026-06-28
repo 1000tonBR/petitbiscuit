@@ -1,16 +1,9 @@
-/* ==========================================================
-   PETIT BISCUIT
-   style.css
-   Parte 1
-========================================================== */
+/*==================================================
+PETIT BISCUIT
+Style.css
+==================================================*/
 
-/*==========================
-RESET
-==========================*/
-
-*,
-*::before,
-*::after{
+*{
     margin:0;
     padding:0;
     box-sizing:border-box;
@@ -21,106 +14,30 @@ html{
 }
 
 body{
-    font-family:'Poppins',sans-serif;
-    color:#4b372f;
-    background:#ffffff;
-    overflow-x:hidden;
-    line-height:1.7;
-}
 
-img{
-    max-width:100%;
-    display:block;
-}
+    font-family:Calibri,Arial,Helvetica,sans-serif;
 
-a{
-    text-decoration:none;
-    color:inherit;
-}
+    background:#faf8f6;
 
-ul{
-    list-style:none;
-}
-
-button{
-    border:none;
-    background:none;
-    cursor:pointer;
-}
-
-/*==========================
-VARIÁVEIS
-==========================*/
-
-:root{
-
-    --primary:#6A3A2A;
-
-    --primary-dark:#4f271c;
-
-    --cream:#F7F3EF;
-
-    --gold:#D8B26A;
-
-    --text:#4B372F;
-
-    --white:#ffffff;
-
-    --shadow:0 12px 35px rgba(0,0,0,.10);
-
-    --radius:18px;
-
-    --transition:.35s ease;
+    color:#444;
 
 }
 
-/*==========================
-ESTRUTURA
-==========================*/
+/*==================================================
+CONTAINER
+==================================================*/
 
 .container{
 
-    width:min(1180px,92%);
+    width:min(1400px,96%);
 
     margin:auto;
 
 }
 
-section{
-
-    padding:100px 0;
-
-}
-
-h1,h2,h3{
-
-    font-family:'Playfair Display',serif;
-
-    font-weight:600;
-
-    color:var(--primary);
-
-}
-
-h2{
-
-    font-size:42px;
-
-    margin-bottom:20px;
-
-}
-
-p{
-
-    font-size:17px;
-
-    color:#5f514a;
-
-}
-
-/*==========================
+/*==================================================
 HEADER
-==========================*/
+==================================================*/
 
 header{
 
@@ -132,19 +49,19 @@ header{
 
     width:100%;
 
+    height:72px;
+
+    background:#ffffff;
+
+    border-bottom:1px solid #ececec;
+
     z-index:999;
-
-    transition:var(--transition);
-
-    background:rgba(255,255,255,.92);
-
-    backdrop-filter:blur(10px);
-
-    box-shadow:0 2px 20px rgba(0,0,0,.05);
 
 }
 
 header .container{
+
+    height:72px;
 
     display:flex;
 
@@ -152,17 +69,15 @@ header .container{
 
     align-items:center;
 
-    height:88px;
-
 }
 
-.logo img{
-
-    height:62px;
-
+.logo img {
+    height: 80px;
+    width: auto;
+    display: block;
 }
 
-nav ul{
+nav{
 
     display:flex;
 
@@ -172,106 +87,91 @@ nav ul{
 
 nav a{
 
-    color:var(--primary);
+    text-decoration:none;
 
-    font-weight:500;
+    color:#6A3A2A;
 
-    transition:var(--transition);
+    font-size:17px;
 
-    position:relative;
+    font-weight:600;
 
-}
-
-nav a::after{
-
-    content:"";
-
-    position:absolute;
-
-    bottom:-8px;
-
-    left:0;
-
-    width:0;
-
-    height:2px;
-
-    background:var(--gold);
-
-    transition:.3s;
+    transition:.25s;
 
 }
 
-nav a:hover::after{
+nav a:hover{
 
-    width:100%;
-
-}
-
-#menu-mobile{
-
-    display:none;
-
-    font-size:30px;
-
-    color:var(--primary);
+    color:#b68b57;
 
 }
 
-/*==========================
 /*==================================================
 CATÁLOGO
 ==================================================*/
 
-.catalogo-page{
+.catalogo{
 
-    padding-top:95px;
+    margin-top:72px;
 
-    padding-bottom:15px;
-
-    background:#fafafa;
+    padding:20px 0;
 
 }
 
-.catalogo-container{
+.catalogo h1{
 
-    width:min(1400px,98%);
+    text-align:center;
 
-    margin:auto;
+    font-size:30px;
+
+    color:#6A3A2A;
+
+    margin-bottom:20px;
+
+    font-weight:600;
 
 }
 
-.catalogo-container iframe{
+.catalogo iframe{
 
     width:100%;
 
-    height:95vh;
+    height:88vh;
 
     border:none;
 
+    background:#fff;
+
     border-radius:12px;
 
-    background:white;
-
-    box-shadow:0 8px 25px rgba(0,0,0,.06);
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
 
 }
-/*==========================================================
-FOOTER
-==========================================================*/
-.footer{
 
-    background:#fff;
+.mobileButton{
+
+    display:none;
+
+}
+
+/*==================================================
+FOOTER
+==================================================*/
+
+footer{
+
+    background:#ffffff;
 
     border-top:1px solid #ececec;
 
-    padding:10px 10px;
+    padding:12px 10px;
+
+    margin-top:15px;
 
 }
 
 .footer-container{
 
-    max-width:1400px;
+    width:min(1400px,96%);
 
     margin:auto;
 
@@ -279,29 +179,27 @@ FOOTER
 
 }
 
-.footer p{
+.footer-container p{
 
     font-family:Calibri,Arial,sans-serif;
 
-    font-size:10pt;
+    font-size:11px;
 
-    color:#6e6e6e;
+    color:#666;
 
-    line-height:1.35;
+    line-height:1.5;
 
-    margin:3px 0;
+    margin:4px 0;
 
 }
 
 .footer-small{
 
-    font-size:9pt;
-
-    color:#909090;
+    color:#8a8a8a;
 
 }
 
-.footer a{
+.footer-container a{
 
     color:#6A3A2A;
 
@@ -309,629 +207,136 @@ FOOTER
 
 }
 
-.footer a:hover{
+.footer-container a:hover{
 
     text-decoration:underline;
 
-}/*==========================================================
-WHATSAPP
-==========================================================*/
-
-.whatsapp{
-
-    position:fixed;
-
-    right:28px;
-
-    bottom:28px;
-
-    width:72px;
-
-    height:72px;
-
-    border-radius:50%;
-
-    background:#25D366;
-
-    color:white;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:34px;
-
-    text-decoration:none;
-
-    box-shadow:0 15px 35px rgba(0,0,0,.25);
-
-    transition:.3s;
-
-    z-index:999;
-
 }
 
-.whatsapp:hover{
+/*==================================================
+RESPONSIVO
+==================================================*/
 
-    transform:scale(1.12);
+@media(max-width:900px){
 
-}
+    header{
 
-/*==========================================================
-SCROLLBAR
-==========================================================*/
+        height:auto;
 
-::-webkit-scrollbar{
-
-    width:10px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#f4f4f4;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-    background:var(--primary);
-
-    border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-    background:var(--primary-dark);
-
-}
-
-/*==========================================================
-SELECTION
-==========================================================*/
-
-::selection{
-
-    background:var(--primary);
-
-    color:white;
-
-}
-
-/*==========================================================
-ANIMAÇÕES
-==========================================================*/
-
-.fade{
-
-    opacity:0;
-
-    transform:translateY(40px);
-
-    transition:1s;
-
-}
-
-.fade.show{
-
-    opacity:1;
-
-    transform:none;
-
-}
-
-/*==========================================================
-HOVER MENU
-==========================================================*/
-
-nav a:hover{
-
-    color:var(--gold);
-
-}
-
-/*==========================================================
-HERO
-==========================================================*/
-
-.hero h1{
-
-    text-shadow:0 2px 15px rgba(255,255,255,.4);
-
-}
-
-.hero p{
-
-    color:#4d433e;
-
-}
-
-/*==========================================================
-BOTÕES
-==========================================================*/
-
-.btn{
-
-    letter-spacing:.5px;
-
-}
-
-.btn:active{
-
-    transform:scale(.97);
-
-}
-
-/*==========================================================
-CARD ICON
-==========================================================*/
-
-.card i{
-
-    font-size:58px;
-
-    color:var(--primary);
-
-}
-
-/*==========================================================
-UTILITÁRIOS
-==========================================================*/
-
-.text-center{
-
-    text-align:center;
-
-}
-
-.mt-30{
-
-    margin-top:30px;
-
-}
-
-.mt-50{
-
-    margin-top:50px;
-
-}
-
-.mb-30{
-
-    margin-bottom:30px;
-
-}
-
-.mb-50{
-
-    margin-bottom:50px;
-
-}
-
-/*==========================================================
-TRANSIÇÕES GLOBAIS
-==========================================================*/
-
-a,
-button,
-.card,
-.btn,
-nav a{
-
-    transition:.35s ease;
-
-}
-
-/*==========================================================
-RESPONSIVIDADE
-==========================================================*/
-
-@media (max-width:1100px){
-
-    .hero h1{
-        font-size:48px;
-    }
-
-    .hero p{
-        font-size:20px;
-    }
-
-    .catalogo iframe{
-        height:780px;
-    }
-
-}
-
-@media (max-width:900px){
-
-    h2{
-        font-size:34px;
-    }
-
-    .hero{
-        padding:130px 0 80px;
-    }
-
-    .hero-logo{
-        width:280px;
-    }
-
-    .hero h1{
-        font-size:42px;
-    }
-
-    .hero p{
-        font-size:18px;
-    }
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-    .catalogo iframe{
-        height:650px;
-    }
-
-}
-
-/*==========================
-MENU MOBILE
-==========================*/
-
-@media(max-width:768px){
-
-    #menu-mobile{
-        display:block;
-        z-index:1001;
-    }
-
-    nav{
-
-        position:fixed;
-
-        top:0;
-
-        right:-100%;
-
-        width:280px;
-
-        height:100vh;
-
-        background:#ffffff;
-
-        box-shadow:-5px 0 25px rgba(0,0,0,.10);
-
-        transition:.35s;
-
-        padding-top:110px;
-
-    }
-
-    nav.active{
-        right:0;
-    }
-
-    nav ul{
-
-        flex-direction:column;
-
-        gap:30px;
-
-        align-items:center;
-
-    }
-
-    nav a{
-
-        font-size:20px;
-
-    }
-
-}
-
-/*==========================
-CELULAR
-==========================*/
-
-@media(max-width:600px){
-
-    section{
-
-        padding:70px 0;
+        padding:10px 0;
 
     }
 
     header .container{
 
-        height:74px;
-
-    }
-
-    .logo img{
-
-        height:46px;
-
-    }
-
-    .hero{
-
-        min-height:90vh;
-
-    }
-
-    .hero-logo{
-
-        width:220px;
-
-        margin-bottom:25px;
-
-    }
-
-    .hero h1{
-
-        font-size:34px;
-
-    }
-
-    .hero p{
-
-        font-size:17px;
-
-        line-height:1.8;
-
-    }
-
-    .buttons{
+        height:auto;
 
         flex-direction:column;
 
-        align-items:center;
+        gap:10px;
 
     }
 
-    .btn{
+    nav{
 
-        width:100%;
+        gap:20px;
 
-        max-width:320px;
+        flex-wrap:wrap;
 
-        text-align:center;
+        justify-content:center;
+
+    }
+
+    .catalogo{
+
+        margin-top:110px;
 
     }
 
     .catalogo iframe{
 
-        height:520px;
-
-    }
-
-    .whatsapp{
-
-        width:62px;
-
-        height:62px;
-
-        font-size:28px;
-
-        right:18px;
-
-        bottom:18px;
-
-    }
-
-    footer{
-
-        padding:50px 20px;
+        height:75vh;
 
     }
 
 }
 
-/*==========================
-IPHONE PEQUENO
-==========================*/
+@media(max-width:768px){
 
-@media(max-width:380px){
-
-    .hero h1{
-
-        font-size:30px;
-
-    }
-
-    .hero p{
-
-        font-size:16px;
-
-    }
-
-    h2{
-
-        font-size:30px;
-
-    }
-
-}
-
-/*==========================================================
-HEADER AO ROLAR
-==========================================================*/
-
-header.scrolled{
-
-    background:rgba(255,255,255,.97);
-
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-
-}
-
-/*==========================================================
-CATÁLOGO
-==========================================================*/
-
-.catalogo{
-
-    transition:.35s;
-
-}
-
-.catalogo:hover{
-
-    transform:translateY(-4px);
-
-}
-
-/*==========================================================
-CARDS
-==========================================================*/
-
-.card{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.card::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    height:4px;
-
-    background:linear-gradient(90deg,var(--primary),var(--gold));
-
-}
-
-.card:hover{
-
-    border-radius:22px;
-
-}
-
-/*==========================================================
-EFEITOS
-==========================================================*/
-
-.hero h1{
-
-    animation:heroTitle 1.1s;
-
-}
-
-.hero p{
-
-    animation:heroText 1.4s;
-
-}
-
-.buttons{
-
-    animation:heroButtons 1.7s;
-
-}
-
-@keyframes heroTitle{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(40px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:none;
-
-    }
-
-}
-
-@keyframes heroText{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(60px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:none;
-
-    }
-
-}
-
-@keyframes heroButtons{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(80px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:none;
-
-    }
-
-}
-
-/*==========================================================
-FOCUS
-==========================================================*/
-
-a:focus,
-button:focus{
-
-    outline:3px solid var(--gold);
-
-    outline-offset:4px;
-
-}
-
-/*==========================================================
-PRINT
-==========================================================*/
-
-@media print{
-
-    header,
-    footer,
-    .whatsapp{
+    .catalogo iframe{
 
         display:none;
 
     }
 
-    body{
+    .mobileButton{
 
-        background:white;
+        display:block;
+
+        width:260px;
+
+        margin:30px auto;
+
+        text-align:center;
+
+        text-decoration:none;
+
+        background:#6A3A2A;
+
+        color:#fff;
+
+        padding:16px;
+
+        border-radius:8px;
+
+        font-size:18px;
+
+        font-weight:600;
+
+        transition:.25s;
+
+    }
+
+    .mobileButton:hover{
+
+        background:#8a5a43;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+.logo img {
+    height: 80px;
+    width: auto;
+    display: block;
+
+    }
+
+    nav{
+
+        gap:14px;
+
+    }
+
+    nav a{
+
+        font-size:15px;
+
+    }
+
+    .catalogo h1{
+
+        font-size:24px;
+
+    }
+
+    .footer-container p{
+
+        font-size:10px;
+
+        line-height:1.4;
 
     }
 
