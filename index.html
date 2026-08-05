@@ -1,113 +1,92 @@
 <!DOCTYPE html>
-
 <html lang="pt-BR">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Petit Biscuit</title>
-
-<link rel="icon" href="img/favicon.png">
-
-<link rel="stylesheet" href="css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Presentes artesanais e cestas especiais para celebrar momentos únicos.">
+    <title>Petit Biscuit | Presentes que transformam momentos</title>
+    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <style>.logo img{filter:none;width:240px}@media(max-width:760px){.logo img{width:190px}}</style>
 </head>
-
 <body>
-
-<header>
-
-    <div class="container">
-
-        <a href="#" class="logo">
-
-            <img src="img/logo-white.png" alt="Petit Biscuit">
-
-        </a>
-
-        <nav>
-
-            <a href="catalogo.html">Catálogos</a>
-
-            <a href="https://www.instagram.com/petitbiscuit.oficial/" target="_blank">Instagram</a>
-
-            <button class="contato-toggle" type="button" aria-expanded="false" aria-controls="contato-balao">Contato</button>
-
-            <div class="contato-balao" id="contato-balao" hidden>
-
-                <strong>Taísa Stamboroski</strong>
-
-                <a href="mailto:contato@petitbiscuit.com.br">contato@petitbiscuit.com.br</a>
-
-                <a href="tel:+5516999619400">+55 16 99961-9400</a>
-
-            </div>
-
-        </nav>
-
-    </div>
-
-</header>
-
-<main>
-
-    <section class="catalogo">
-
-        <div class="container">
-
-            <p class="destaque">Destaque especial</p>
-
-            <h1>Catálogo Dia dos Pais</h1>
-
-            <iframe src="pdf/pais.pdf" title="Catálogo Dia dos Pais"></iframe>
-
-            <a class="mobileButton" href="pdf/pais.pdf" target="_blank">
-
-                Abrir Catálogo Dia dos Pais
-
-            </a>
-
+    <header class="cabecalho">
+        <div class="container navegacao">
+            <a class="logo" href="#inicio" aria-label="Petit Biscuit - Início"><img src="img/logo-original-transparente.png" alt="Petit Biscuit"></a>
+            <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="menu-principal"><span></span><span></span><span></span><span class="visually-hidden">Abrir menu</span></button>
+            <nav id="menu-principal">
+                <a href="#colecoes">Coleções</a>
+                <a href="#sobre">A Petit Biscuit</a>
+                <a href="https://www.instagram.com/petitbiscuit.oficial/" target="_blank" rel="noopener">Instagram</a>
+                <button class="contato-toggle" type="button" aria-expanded="false" aria-controls="contato-modal">Fale conosco</button>
+            </nav>
         </div>
+    </header>
 
-    </section>
+    <main>
+        <section class="hero" id="inicio">
+            <div class="container hero__conteudo">
+                <p class="eyebrow">Feito para presentear</p>
+                <h1>Momentos especiais<br>merecem ser <em>inesquecíveis.</em></h1>
+                <p class="hero__texto">Cestas e presentes artesanais pensados nos mínimos detalhes para emocionar quem você ama.</p>
+                <div class="hero__acoes">
+                    <a class="botao botao--principal" href="#colecoes">Conheça as coleções</a>
+                    <a class="botao botao--texto" href="https://wa.me/5516999619400" target="_blank" rel="noopener">Pedir pelo WhatsApp <span aria-hidden="true">→</span></a>
+                </div>
+            </div>
+            <a class="hero__rolar" href="#colecoes">Role para descobrir <span aria-hidden="true">↓</span></a>
+        </section>
 
-</main>
+        <section class="diferenciais" aria-label="Diferenciais da Petit Biscuit">
+            <div class="container diferenciais__grade">
+                <p><strong>Feito à mão</strong><span>com cuidado em cada detalhe</span></p>
+                <p><strong>Personalizado</strong><span>para cada celebração</span></p>
+                <p><strong>Feito para emocionar</strong><span>do primeiro olhar à entrega</span></p>
+            </div>
+        </section>
 
-<footer>
+        <section class="colecoes secao" id="colecoes">
+            <div class="container">
+                <div class="secao__cabecalho">
+                    <div><p class="eyebrow">Para cada ocasião</p><h2>Escolha a forma<br>mais bonita de dizer.</h2></div>
+                    <p>Presentes que tornam datas, encontros e pequenos gestos ainda mais memoráveis.</p>
+                </div>
+                <div class="colecoes__grade">
+                    <a class="colecao-card colecao-card--destaque" href="pdf/pais.pdf" target="_blank">
+                        <span>Em destaque</span><h3>Dia dos Pais</h3><p>Para celebrar vínculos que ficam para sempre.</p><b>Ver catálogo <i aria-hidden="true">→</i></b>
+                    </a>
+                    <a class="colecao-card colecao-card--cafe" href="pdf/cafe.pdf" target="_blank">
+                        <span>Cestas especiais</span><h3>Café da manhã</h3><p>Uma manhã que começa com carinho.</p><b>Ver catálogo <i aria-hidden="true">→</i></b>
+                    </a>
+                    <a class="colecao-card colecao-card--pedido" href="https://wa.me/5516999619400" target="_blank" rel="noopener">
+                        <span>Do seu jeito</span><h3>Crie um presente único</h3><p>Conte sua ideia. Nós cuidamos do encantamento.</p><b>Falar conosco <i aria-hidden="true">→</i></b>
+                    </a>
+                </div>
+                <a class="link-seta" href="catalogo.html">Ver todos os catálogos <span aria-hidden="true">→</span></a>
+            </div>
+        </section>
 
-<div class="footer-container">
+        <section class="sobre" id="sobre">
+            <div class="container sobre__grade">
+                <div class="sobre__imagem"><img src="img/hero.jpg" alt="Cesta Petit Biscuit preparada com frutas, pães e doces"></div>
+                <div class="sobre__conteudo"><p class="eyebrow">A Petit Biscuit</p><h2>Presentear é criar uma memória.</h2><p>Mais do que uma cesta, cada Petit Biscuit reúne sabores, afeto e uma apresentação encantadora. Tudo é escolhido e preparado para que o seu gesto chegue de um jeito inesquecível.</p><a class="link-seta" href="https://www.instagram.com/petitbiscuit.oficial/" target="_blank" rel="noopener">Acompanhe nosso Instagram <span aria-hidden="true">→</span></a></div>
+            </div>
+        </section>
 
-<p>
+        <section class="chamada-final"><div class="container"><p class="eyebrow">Vamos criar algo especial?</p><h2>Seu presente começa<br>com uma boa ideia.</h2><a class="botao botao--claro" href="https://wa.me/5516999619400" target="_blank" rel="noopener">Fale pelo WhatsApp</a></div></section>
+    </main>
 
-Endereço: Matão - SP |
+    <footer><div class="container rodape"><a class="logo" href="#inicio"><img src="img/logo-original-transparente.png" alt="Petit Biscuit"></a><div><a href="tel:+5516999619400">(16) 99961-9400</a><a href="mailto:contato@petitbiscuit.com.br">contato@petitbiscuit.com.br</a></div><p>Matão – SP · © <span class="ano"></span> Petit Biscuit</p></div></footer>
 
-© Todos os direitos reservados. 2026 |
-
-Telefone: (16) 99961-9400 |
-
-<a href="mailto:contato@petitbiscuit.com.br">
-
-contato@petitbiscuit.com.br
-
-</a>
-
-</p>
-
-<p class="footer-small">
-
-Eventuais promoções, descontos e prazos de pagamento expostos neste site são válidos apenas para compras via internet. As fotos, textos e layout aqui veiculados são de propriedade da Petit Biscuit. É proibida a utilização total ou parcial sem prévia autorização.
-
-</p>
-
-</div>
-
-</footer>
-
-<script src="js/script.js"></script>
-
+    <div class="contato-modal" id="contato-modal" hidden>
+        <div class="contato-modal__fundo" data-fechar-contato></div>
+        <section class="contato-modal__conteudo" role="dialog" aria-modal="true" aria-labelledby="titulo-contato">
+            <button class="contato-modal__fechar" type="button" aria-label="Fechar contato" data-fechar-contato>&times;</button>
+            <p class="eyebrow">Fale conosco</p><h2 id="titulo-contato">Vamos criar algo especial?</h2><p>Escolha como prefere conversar com a gente.</p>
+            <a class="botao botao--principal" href="https://wa.me/5516999619400" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="contato-modal__email" href="mailto:contato@petitbiscuit.com.br">contato@petitbiscuit.com.br</a>
+        </section>
+    </div>
+    <script src="js/script.js"></script>
 </body>
-
 </html>
