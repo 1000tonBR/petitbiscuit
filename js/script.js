@@ -12,18 +12,18 @@ document.addEventListener('DOMContentLoaded',()=>{
 
   const musica=document.querySelector('#musica-player'),botaoMusica=document.querySelector('#musica-toggle');
   if(musica&&botaoMusica){
-    const comandoMusica=func=>musica.contentWindow.postMessage(JSON.stringify({event:'command',func,args:[]}), 'https://www.youtube.com');
-    musica.addEventListener('load',()=>{
-      comandoMusica('mute');
-      comandoMusica('playVideo');
-    });
+    const atualizarBotao=ativa=>{
+      botaoMusica.setAttribute('aria-pressed',String(ativa));
+      botaoMusica.textContent=ativa?'❚❚ Pausar música':'♪ Ativar música';
+    };
+    musica.play().then(()=>atualizarBotao(true)).catch(()=>atualizarBotao(false));
     botaoMusica.addEventListener('click',()=>{
-      const ativa=botaoMusica.getAttribute('aria-pressed')==='true';
-      comandoMusica(ativa?'mute':'unMute');
-      comandoMusica(ativa?'pauseVideo':'playVideo');
-      if(!ativa)setTimeout(()=>comandoMusica('unMute'),250);
-      botaoMusica.setAttribute('aria-pressed',String(!ativa));
-      botaoMusica.textContent=ativa?'♪ Ativar música':'❚❚ Pausar música';
+      if(musica.paused){
+        musica.play().then(()=>atualizarBotao(true)).catch(()=>atualizarBotao(false));
+      }else{
+        musica.pause();
+        atualizarBotao(false);
+      }
     });
   }
 });

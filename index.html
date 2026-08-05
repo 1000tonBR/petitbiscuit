@@ -7,7 +7,7 @@
     <title>Petit Biscuit | Presentes que transformam momentos</title>
     <link rel="icon" href="img/favicon.png">
     <link rel="stylesheet" href="css/style.css?v=20260804-2">
-    <style>.logo img{filter:none;width:240px}@media(max-width:760px){.logo img{width:190px}}.musica-toggle{position:fixed;right:22px;bottom:22px;z-index:20;border:0;border-radius:30px;padding:13px 18px;background:#603326;color:#fff;font:700 13px Arial,sans-serif;box-shadow:0 8px 20px rgba(40,20,15,.25);cursor:pointer}.musica-toggle:hover{background:#a65f47}.musica-player{position:absolute;width:200px;height:200px;left:-9999px;top:0;pointer-events:none}@media(max-width:760px){.musica-toggle{right:14px;bottom:14px;padding:12px 15px}}</style>
+    <style>.logo img{filter:none;width:240px}@media(max-width:760px){.logo img{width:190px}}.musica-toggle{position:fixed;right:22px;bottom:22px;z-index:20;border:0;border-radius:30px;padding:13px 18px;background:#603326;color:#fff;font:700 13px Arial,sans-serif;box-shadow:0 8px 20px rgba(40,20,15,.25);cursor:pointer}.musica-toggle:hover{background:#a65f47}.musica-player{display:none}@media(max-width:760px){.musica-toggle{right:14px;bottom:14px;padding:12px 15px}}</style>
 </head>
 <body>
     <header class="cabecalho">
@@ -87,8 +87,8 @@
             <a class="contato-modal__email" href="mailto:contato@petitbiscuit.com.br">contato@petitbiscuit.com.br</a>
         </section>
     </div>
-    <iframe class="musica-player" id="musica-player" title="Música ambiente" width="200" height="200" src="https://www.youtube.com/embed/8inJtTG_DuU?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=8inJtTG_DuU&amp;enablejsapi=1" allow="autoplay; encrypted-media" aria-hidden="true"></iframe>
-    <button class="musica-toggle" id="musica-toggle" type="button" aria-pressed="false">♪ Ativar música</button>
+    <audio class="musica-player" id="musica-player" autoplay loop preload="auto"><source src="music.mp3" type="audio/mpeg"></audio>
+    <button class="musica-toggle" id="musica-toggle" type="button" aria-pressed="true">❚❚ Pausar música</button>
     <script src="js/script.js?v=20260805-1"></script>
 </body>
 </html>
