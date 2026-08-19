@@ -6,7 +6,7 @@
     <meta name="description" content="Presentes artesanais e cestas especiais para celebrar momentos únicos.">
     <title>Petit Biscuit | Presentes que transformam momentos</title>
     <link rel="icon" href="img/favicon.png">
-    <link rel="stylesheet" href="css/style.css?v=20260804-2">
+    <link rel="stylesheet" href="css/style.css?v=20260819-2">
     <style>.logo img{filter:none;width:240px}@media(max-width:760px){.logo img{width:190px}}.musica-toggle{position:fixed;right:22px;bottom:22px;z-index:20;border:0;border-radius:30px;padding:13px 18px;background:#603326;color:#fff;font:700 13px Arial,sans-serif;box-shadow:0 8px 20px rgba(40,20,15,.25);cursor:pointer}.musica-toggle:hover{background:#a65f47}.musica-player{display:none}@media(max-width:760px){.musica-toggle{right:14px;bottom:14px;padding:12px 15px}}</style>
 </head>
 <body>
@@ -47,22 +47,32 @@
 
         <section class="colecoes secao" id="colecoes">
             <div class="container">
-                <div class="secao__cabecalho">
-                    <div><p class="eyebrow">Para cada ocasião</p><h2>Escolha a forma<br>mais bonita de presentear.</h2></div>
-                    <p>Presentes que tornam datas, encontros e pequenos gestos ainda mais memoráveis.</p>
+                <div class="biblioteca-cabecalho">
+                    <p class="eyebrow">Petit Biscuit</p>
+                    <h2>Catálogos</h2>
+                    <p>Descubra as novidades, acompanhe os próximos lançamentos e visite nossas coleções anteriores.</p>
                 </div>
-                <div class="colecoes__grade">
-                    <a class="colecao-card colecao-card--destaque" href="pdf/pais.pdf" target="_blank">
-                        <span>Em destaque</span><h3>Dia dos Pais</h3><p>Para celebrar vínculos que ficam para sempre.</p><b>Ver catálogo <i aria-hidden="true">→</i></b>
+
+                <div class="catalogos-grade">
+                    <a class="catalogo-card catalogo-card--atual" href="pdf/Cat%C3%A1logo%20Primavera%2026.pdf" target="_blank" rel="noopener">
+                        <img class="catalogo-card__imagem" data-capa-padrao="img/catalogos/catalogo-primavera-26.jpg" alt="" loading="lazy">
+                        <span class="catalogo-card__tag catalogo-card__tag--novo">Novo</span>
+                        <span class="catalogo-card__ano">2026</span>
+                        <div class="catalogo-card__conteudo"><small>Coleção vigente</small><h3>Catálogo Primavera</h3><span class="catalogo-card__acao">Abrir catálogo <b aria-hidden="true">→</b></span></div>
                     </a>
-                    <a class="colecao-card colecao-card--cafe" href="pdf/cafe.pdf" target="_blank">
-                        <span>Cestas especiais</span><h3>Café da manhã</h3><p>Uma manhã que começa com carinho.</p><b>Ver catálogo <i aria-hidden="true">→</i></b>
-                    </a>
-                    <a class="colecao-card colecao-card--pedido" href="https://wa.me/5516999619400" target="_blank" rel="noopener">
-                        <span>Do seu jeito</span><h3>Crie um presente único</h3><p>Conte sua ideia. Nós cuidamos do encantamento.</p><b>Falar conosco <i aria-hidden="true">→</i></b>
-                    </a>
+
+                    <article class="catalogo-card catalogo-card--embreve catalogo-card--cliente"><span class="catalogo-card__tag">Em breve</span><div class="catalogo-card__conteudo"><time datetime="2026-09-15">15/09</time><h3>Dia do Cliente</h3><span class="catalogo-card__acao">Lançamento em breve</span></div></article>
+
+                    <article class="catalogo-card catalogo-card--embreve catalogo-card--criancas"><span class="catalogo-card__tag">Em breve</span><div class="catalogo-card__conteudo"><time datetime="2026-10-12">12/10</time><h3>Dia das Crianças</h3><span class="catalogo-card__acao">Lançamento em breve</span></div></article>
+
+                    <article class="catalogo-card catalogo-card--embreve catalogo-card--professores"><span class="catalogo-card__tag">Em breve</span><div class="catalogo-card__conteudo"><time datetime="2026-10-15">15/10</time><h3>Dia dos Professores</h3><span class="catalogo-card__acao">Lançamento em breve</span></div></article>
+
+                    <a class="catalogo-card catalogo-card--passado" href="pdf/Dia%20dos%20Pais%2026.pdf" target="_blank" rel="noopener"><img class="catalogo-card__imagem" data-capa-padrao="img/catalogos/dia-dos-pais-26.jpg" alt="" loading="lazy"><span class="catalogo-card__ano">2026</span><div class="catalogo-card__conteudo"><small>Coleção encerrada</small><h3>Dia dos Pais</h3><span class="catalogo-card__acao">Rever catálogo <b aria-hidden="true">→</b></span></div></a>
+
+                    <a class="catalogo-card catalogo-card--passado" href="pdf/Cat%C3%A1logo%20Inverno%2026.pdf" target="_blank" rel="noopener"><img class="catalogo-card__imagem" data-capa-padrao="img/catalogos/catalogo-inverno-26.jpg" alt="" loading="lazy"><span class="catalogo-card__ano">2026</span><div class="catalogo-card__conteudo"><small>Coleção encerrada</small><h3>Catálogo Inverno</h3><span class="catalogo-card__acao">Rever catálogo <b aria-hidden="true">→</b></span></div></a>
                 </div>
-                <a class="link-seta" href="catalogo.html">Ver todos os catálogos <span aria-hidden="true">→</span></a>
+
+                <a class="link-seta" href="catalogo.html">Ver a biblioteca completa <span aria-hidden="true">→</span></a>
             </div>
         </section>
 
@@ -89,6 +99,6 @@
     </div>
     <audio class="musica-player" id="musica-player" autoplay loop preload="auto"><source src="music.mp3" type="audio/mpeg"></audio>
     <button class="musica-toggle" id="musica-toggle" type="button" aria-pressed="true">❚❚ Pausar música</button>
-    <script src="js/script.js?v=20260805-1"></script>
+    <script src="js/script.js?v=20260819-3"></script>
 </body>
 </html>
