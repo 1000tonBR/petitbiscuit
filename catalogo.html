@@ -34,26 +34,21 @@
 
                 <div class="catalogos-grupo">
                     <h2>Agora</h2>
-                    <div class="catalogos-grade">
-                        <a class="catalogo-card catalogo-card--atual" href="pdf/Cat%C3%A1logo%20Primavera%2026.pdf" target="_blank" rel="noopener"><img class="catalogo-card__imagem" data-capa-padrao="img/catalogos/catalogo-primavera-26.jpg" alt="" loading="lazy"><span class="catalogo-card__tag catalogo-card__tag--novo">Novo</span><span class="catalogo-card__ano">2026</span><div class="catalogo-card__conteudo"><small>Coleção vigente</small><h3>Catálogo Primavera</h3><span class="catalogo-card__acao">Abrir catálogo <b aria-hidden="true">→</b></span></div></a>
-                    </div>
+                    <div class="catalogos-grade" data-catalogos="atual"></div>
                 </div>
 
                 <div class="catalogos-grupo">
                     <h2>Próximos lançamentos</h2>
                     <div class="catalogos-grade">
-                        <article class="catalogo-card catalogo-card--embreve catalogo-card--cliente"><span class="catalogo-card__tag">Em breve</span><div class="catalogo-card__conteudo"><time datetime="2026-09-15">15/09</time><h3>Dia do Cliente</h3><span class="catalogo-card__acao">Lançamento em breve</span></div></article>
-                        <article class="catalogo-card catalogo-card--embreve catalogo-card--criancas"><span class="catalogo-card__tag">Em breve</span><div class="catalogo-card__conteudo"><time datetime="2026-10-12">12/10</time><h3>Dia das Crianças</h3><span class="catalogo-card__acao">Lançamento em breve</span></div></article>
-                        <article class="catalogo-card catalogo-card--embreve catalogo-card--professores"><span class="catalogo-card__tag">Em breve</span><div class="catalogo-card__conteudo"><time datetime="2026-10-15">15/10</time><h3>Dia dos Professores</h3><span class="catalogo-card__acao">Lançamento em breve</span></div></article>
+                        <article class="catalogo-card catalogo-card--embreve catalogo-card--cliente" data-catalogo-previsto="Dia do Cliente"><span class="catalogo-card__tag">Em breve</span><div class="catalogo-card__conteudo"><time datetime="2026-09-15">15/09</time><h3>Dia do Cliente</h3><span class="catalogo-card__acao">Lançamento em breve</span></div></article>
+                        <article class="catalogo-card catalogo-card--embreve catalogo-card--criancas" data-catalogo-previsto="Dia das Crianças"><span class="catalogo-card__tag">Em breve</span><div class="catalogo-card__conteudo"><time datetime="2026-10-12">12/10</time><h3>Dia das Crianças</h3><span class="catalogo-card__acao">Lançamento em breve</span></div></article>
+                        <article class="catalogo-card catalogo-card--embreve catalogo-card--professores" data-catalogo-previsto="Dia dos Professores"><span class="catalogo-card__tag">Em breve</span><div class="catalogo-card__conteudo"><time datetime="2026-10-15">15/10</time><h3>Dia dos Professores</h3><span class="catalogo-card__acao">Lançamento em breve</span></div></article>
                     </div>
                 </div>
 
                 <div class="catalogos-grupo catalogos-grupo--arquivo">
                     <h2>Coleções anteriores</h2>
-                    <div class="catalogos-grade">
-                        <a class="catalogo-card catalogo-card--passado" href="pdf/Dia%20dos%20Pais%2026.pdf" target="_blank" rel="noopener"><img class="catalogo-card__imagem" data-capa-padrao="img/catalogos/dia-dos-pais-26.jpg" alt="" loading="lazy"><span class="catalogo-card__ano">2026</span><div class="catalogo-card__conteudo"><small>Coleção encerrada</small><h3>Dia dos Pais</h3><span class="catalogo-card__acao">Rever catálogo <b aria-hidden="true">→</b></span></div></a>
-                        <a class="catalogo-card catalogo-card--passado" href="pdf/Cat%C3%A1logo%20Inverno%2026.pdf" target="_blank" rel="noopener"><img class="catalogo-card__imagem" data-capa-padrao="img/catalogos/catalogo-inverno-26.jpg" alt="" loading="lazy"><span class="catalogo-card__ano">2026</span><div class="catalogo-card__conteudo"><small>Coleção encerrada</small><h3>Catálogo Inverno</h3><span class="catalogo-card__acao">Rever catálogo <b aria-hidden="true">→</b></span></div></a>
-                    </div>
+                    <div class="catalogos-grade" data-catalogos="passado"></div>
                 </div>
             </div>
         </section>
@@ -62,6 +57,7 @@
     <footer><div class="container rodape"><a class="logo" href="index.html"><img src="img/logo-original-transparente.png" alt="Petit Biscuit"></a><div><a href="tel:+5516999619400">(16) 99961-9400</a><a href="mailto:contato@petitbiscuit.com.br">contato@petitbiscuit.com.br</a></div><p>Matão - SP · © <span class="ano"></span> Petit Biscuit</p></div></footer>
 
     <div class="contato-modal" id="contato-modal" hidden><div class="contato-modal__fundo" data-fechar-contato></div><section class="contato-modal__conteudo" role="dialog" aria-modal="true" aria-labelledby="titulo-contato"><button class="contato-modal__fechar" type="button" aria-label="Fechar contato" data-fechar-contato>&times;</button><p class="eyebrow">Fale conosco</p><h2 id="titulo-contato">Vamos criar algo especial?</h2><p>Escolha como prefere conversar com a gente.</p><a class="botao botao--principal" href="https://wa.me/5516999619400" target="_blank" rel="noopener">WhatsApp</a><a class="contato-modal__email" href="mailto:contato@petitbiscuit.com.br">contato@petitbiscuit.com.br</a></section></div>
-    <script src="js/script.js?v=20260819-3"></script>
+    <script src="js/catalogos.js?v=d8a277dda6"></script>
+    <script src="js/script.js?v=20260819-5"></script>
 </body>
 </html>

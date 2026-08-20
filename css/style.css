@@ -9,3 +9,4 @@
 
 /* Capas automáticas: o nome da imagem acompanha o nome do PDF. */
 .catalogo-card__imagem{position:absolute;inset:0;z-index:-2;display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .35s ease,filter .35s ease}.catalogo-card--passado .catalogo-card__imagem{filter:grayscale(.72) sepia(.2);opacity:.7}a.catalogo-card:hover .catalogo-card__imagem{transform:scale(1.035)}
+.catalogos-injecao{display:contents}.catalogo-card--sem-capa{background:linear-gradient(145deg,#b98267,#704233)}
