@@ -1,4 +1,4 @@
-import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { dirname, extname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,19 +26,27 @@ async function lerManifestoExistente() {
   }
 }
 
-const [arquivosPdf, arquivosCapa, catalogosAnteriores] = await Promise.all([
+const [nomesPdf, arquivosCapa, catalogosAnteriores] = await Promise.all([
   readdir(pastaPdf),
   readdir(pastaCapas),
   lerManifestoExistente()
 ]);
 
-const pdfs = arquivosPdf.filter(nome => extname(nome).toLowerCase() === '.pdf');
+const pdfs = await Promise.all(
+  nomesPdf
+    .filter(nome => extname(nome).toLowerCase() === '.pdf')
+    .map(async nome => ({ nome, tamanho: (await stat(join(pastaPdf, nome))).size }))
+);
 const capas = arquivosCapa.filter(nome => extensoesDeImagem.has(extname(nome).toLowerCase()));
 const capaPorNome = new Map(capas.map(nome => [chave(semExtensao(nome)), nome]));
 const anteriorPorArquivo = new Map(catalogosAnteriores.map(item => [chave(item.arquivo), item]));
-const arquivosNovos = new Set(pdfs.filter(nome => !anteriorPorArquivo.has(chave(nome))).map(chave));
+const arquivosNovos = new Set(
+  pdfs
+    .filter(item => item.tamanho > 0 && !anteriorPorArquivo.has(chave(item.nome)))
+    .map(item => chave(item.nome))
+);
 
-const catalogos = pdfs.map(arquivo => {
+const catalogos = pdfs.map(({ nome: arquivo, tamanho }) => {
   const nomeCompleto = semExtensao(arquivo);
   const partes = nomeCompleto.match(/^(.*?)(?:\s+(\d{2}|\d{4}))?$/);
   const anoInformado = partes?.[2];
@@ -50,26 +58,28 @@ const catalogos = pdfs.map(arquivo => {
     capa: capaPorNome.get(chave(nomeCompleto)) || null,
     titulo: partes?.[1]?.trim() || nomeCompleto,
     ano,
-    status: anterior?.status === 'atual' ? 'atual' : 'passado'
+    status: tamanho === 0 ? 'embreve' : anterior?.status === 'atual' ? 'atual' : 'passado'
   };
 });
 
 if (arquivoAtualInformado) {
   catalogos.forEach(item => {
-    item.status = chave(item.arquivo) === chave(arquivoAtualInformado) ? 'atual' : 'passado';
+    if(item.status !== 'embreve')item.status = chave(item.arquivo) === chave(arquivoAtualInformado) ? 'atual' : 'passado';
   });
 } else if (promoverNovos && arquivosNovos.size) {
   const novos = catalogos
     .filter(item => arquivosNovos.has(chave(item.arquivo)))
     .sort((a, b) => a.arquivo.localeCompare(b.arquivo, 'pt-BR'));
-  catalogos.forEach(item => { item.status = 'passado'; });
+  catalogos.forEach(item => { if(item.status !== 'embreve')item.status = 'passado'; });
   novos.at(-1).status = 'atual';
-} else if (!catalogos.some(item => item.status === 'atual') && catalogos.length) {
-  catalogos[0].status = 'atual';
+} else if (!catalogos.some(item => item.status === 'atual')) {
+  const primeiroDisponivel = catalogos.find(item => item.status !== 'embreve');
+  if(primeiroDisponivel)primeiroDisponivel.status = 'atual';
 }
 
 catalogos.sort((a, b) => {
-  if (a.status !== b.status) return a.status === 'atual' ? -1 : 1;
+  const ordem = { atual: 0, embreve: 1, passado: 2 };
+  if (a.status !== b.status) return ordem[a.status] - ordem[b.status];
   return a.titulo.localeCompare(b.titulo, 'pt-BR');
 });
 
@@ -85,7 +95,7 @@ for (const pagina of ['index.html', 'catalogo.html']) {
   await writeFile(caminhoPagina, htmlAtualizado, 'utf8');
 }
 
-for (const item of catalogos.filter(item => !item.capa)) {
+for (const item of catalogos.filter(item => item.status !== 'embreve' && !item.capa)) {
   console.warn(`Capa não encontrada para: ${item.arquivo}`);
 }
 console.log(`${catalogos.length} catálogo(s) incluído(s) em js/catalogos.js.`);

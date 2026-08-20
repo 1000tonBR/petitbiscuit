@@ -35,20 +35,22 @@ document.addEventListener('DOMContentLoaded',async()=>{
             capa:capas.get(chave(nomeCompleto))||null,
             titulo:partes?.[1]?.trim()||nomeCompleto,
             ano,
-            status:locais.get(chave(item.name))?.status==='atual'?'atual':'passado',
-            novo:!locais.has(chave(item.name))
+            status:item.size===0?'embreve':locais.get(chave(item.name))?.status==='atual'?'atual':'passado',
+            novo:item.size>0&&!locais.has(chave(item.name))
           };
         });
 
       const novos=remotos.filter(item=>item.novo).sort((a,b)=>a.arquivo.localeCompare(b.arquivo,'pt-BR'));
       if(novos.length){
-        remotos.forEach(item=>{item.status='passado';});
+        remotos.forEach(item=>{if(item.status!=='embreve')item.status='passado';});
         novos.at(-1).status='atual';
-      }else if(!remotos.some(item=>item.status==='atual')&&remotos.length){
-        remotos[0].status='atual';
+      }else if(!remotos.some(item=>item.status==='atual')){
+        const primeiroDisponivel=remotos.find(item=>item.status!=='embreve');
+        if(primeiroDisponivel)primeiroDisponivel.status='atual';
       }
       remotos.forEach(item=>{delete item.novo;});
-      return remotos.sort((a,b)=>a.status!==b.status?(a.status==='atual'?-1:1):a.titulo.localeCompare(b.titulo,'pt-BR'));
+      const ordem={atual:0,embreve:1,passado:2};
+      return remotos.sort((a,b)=>a.status!==b.status?ordem[a.status]-ordem[b.status]:a.titulo.localeCompare(b.titulo,'pt-BR'));
     }catch(erro){
       console.warn(erro.message);
       return catalogosLocais;
@@ -60,11 +62,15 @@ document.addEventListener('DOMContentLoaded',async()=>{
   const caminhoArquivo=(pasta,nome)=>`${pasta}/${encodeURIComponent(nome)}`;
   const criarCardCatalogo=catalogo=>{
     const atual=catalogo.status==='atual';
-    const card=document.createElement('a');
-    card.className=`catalogo-card ${atual?'catalogo-card--atual':'catalogo-card--passado'}${catalogo.capa?'':' catalogo-card--sem-capa'}`;
-    card.href=caminhoArquivo('pdf',catalogo.arquivo);
-    card.target='_blank';
-    card.rel='noopener';
+    const emBreve=catalogo.status==='embreve';
+    const card=document.createElement(emBreve?'article':'a');
+    const classeEstado=emBreve?'catalogo-card--embreve':atual?'catalogo-card--atual':'catalogo-card--passado';
+    card.className=`catalogo-card ${classeEstado}${catalogo.capa?' catalogo-card--com-capa':' catalogo-card--sem-capa'}`;
+    if(!emBreve){
+      card.href=caminhoArquivo('pdf',catalogo.arquivo);
+      card.target='_blank';
+      card.rel='noopener';
+    }
 
     if(catalogo.capa){
       const imagem=document.createElement('img');
@@ -75,10 +81,10 @@ document.addEventListener('DOMContentLoaded',async()=>{
       card.appendChild(imagem);
     }
 
-    if(atual){
+    if(atual||emBreve){
       const tag=document.createElement('span');
-      tag.className='catalogo-card__tag catalogo-card__tag--novo';
-      tag.textContent='Novo';
+      tag.className=`catalogo-card__tag${atual?' catalogo-card__tag--novo':''}`;
+      tag.textContent=atual?'Novo':'Em breve';
       card.appendChild(tag);
     }
 
@@ -91,8 +97,8 @@ document.addEventListener('DOMContentLoaded',async()=>{
 
     const conteudo=document.createElement('div');
     conteudo.className='catalogo-card__conteudo';
-    const descricao=atual?'Coleção vigente':'Coleção encerrada';
-    const acao=atual?'Abrir catálogo':'Rever catálogo';
+    const descricao=emBreve?'Novidade a caminho':atual?'Coleção vigente':'Coleção encerrada';
+    const acao=emBreve?'Lançamento em breve':atual?'Abrir catálogo':'Rever catálogo';
     conteudo.innerHTML=`<small>${descricao}</small><h3></h3><span class="catalogo-card__acao">${acao} <b aria-hidden="true">→</b></span>`;
     conteudo.querySelector('h3').textContent=catalogo.titulo;
     card.appendChild(conteudo);
@@ -104,19 +110,6 @@ document.addEventListener('DOMContentLoaded',async()=>{
     catalogos
       .filter(catalogo=>catalogo.status===status)
       .forEach(catalogo=>lista.appendChild(criarCardCatalogo(catalogo)));
-  });
-
-  const normalizarNome=nome=>nome
-    .replace(/^catálogo\s+/i,'')
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g,'')
-    .toLowerCase()
-    .trim();
-  const catalogosDisponiveis=new Set(
-    catalogos.map(catalogo=>normalizarNome(catalogo.titulo))
-  );
-  document.querySelectorAll('[data-catalogo-previsto]').forEach(card=>{
-    if(catalogosDisponiveis.has(normalizarNome(card.dataset.catalogoPrevisto)))card.remove();
   });
 
   document.querySelectorAll('a.catalogo-card[href*=".pdf"]').forEach(card=>{
