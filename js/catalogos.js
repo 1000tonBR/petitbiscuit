@@ -22,6 +22,16 @@ window.PETIT_BISCUIT_CATALOGOS = [
     "status": "embreve"
   },
   {
+<<<<<<< HEAD
+=======
+    "arquivo": "Café da manhã.pdf",
+    "capa": "Café da manhã.png",
+    "titulo": "Café da manhã",
+    "ano": null,
+    "status": "passado"
+  },
+  {
+>>>>>>> 639848601398f64e0de003060edd8851a4a801be
     "arquivo": "Catálogo Dia das Mães 26.pdf",
     "capa": "Catálogo Dia das Mães 26.png",
     "titulo": "Catálogo Dia das Mães",
