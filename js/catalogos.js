@@ -8,20 +8,6 @@ window.PETIT_BISCUIT_CATALOGOS = [
     "status": "atual"
   },
   {
-    "arquivo": "Dia da Secretária.pdf",
-    "capa": null,
-    "titulo": "Dia da Secretária",
-    "ano": null,
-    "status": "embreve"
-  },
-  {
-    "arquivo": "Dia das Crianças.pdf",
-    "capa": null,
-    "titulo": "Dia das Crianças",
-    "ano": null,
-    "status": "embreve"
-  },
-  {
     "arquivo": "Dia do Professor.pdf",
     "capa": null,
     "titulo": "Dia do Professor",
@@ -40,6 +26,13 @@ window.PETIT_BISCUIT_CATALOGOS = [
     "capa": "Catálogo Dia dos Avós 26.png",
     "titulo": "Catálogo Dia dos Avós",
     "ano": 2026,
+    "status": "passado"
+  },
+  {
+    "arquivo": "Dia das Crianças.pdf",
+    "capa": null,
+    "titulo": "Dia das Crianças",
+    "ano": null,
     "status": "passado"
   },
   {
