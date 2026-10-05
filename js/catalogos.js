@@ -16,7 +16,7 @@ window.PETIT_BISCUIT_CATALOGOS = [
   },
   {
     "arquivo": "Café da manhã.pdf",
-    "capa": "Café da manhã.jpg",
+    "capa": "Café da manhã.png",
     "titulo": "Café da manhã",
     "ano": null,
     "status": "passado"
