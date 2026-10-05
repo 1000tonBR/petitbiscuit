@@ -30,7 +30,7 @@ window.PETIT_BISCUIT_CATALOGOS = [
   },
   {
     "arquivo": "Dia das Crianças.pdf",
-    "capa": null,
+    "capa": "Dia das Crianças.jpg",
     "titulo": "Dia das Crianças",
     "ano": null,
     "status": "passado"
