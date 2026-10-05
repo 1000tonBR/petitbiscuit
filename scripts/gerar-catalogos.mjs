@@ -5,77 +5,53 @@ import { fileURLToPath } from 'node:url';
 
 const raiz = dirname(dirname(fileURLToPath(import.meta.url)));
 const pastaPdf = join(raiz, 'pdf');
+const pastaPdfVigente = join(pastaPdf, 'vigente');
 const pastaCapas = join(pastaPdf, 'capas');
 const destino = join(raiz, 'js', 'catalogos.js');
 const extensoesDeImagem = new Set(['.avif', '.bmp', '.gif', '.jpeg', '.jpg', '.png', '.svg', '.webp']);
-const argumentoAtual = process.argv.indexOf('--atual');
-const arquivoAtualInformado = argumentoAtual >= 0 ? process.argv[argumentoAtual + 1] : null;
-const promoverNovos = process.argv.includes('--promover-novos');
 
 const chave = nome => nome.normalize('NFC').toLocaleLowerCase('pt-BR');
 const semExtensao = nome => nome.slice(0, -extname(nome).length);
 
-async function lerManifestoExistente() {
-  try {
-    const conteudo = await readFile(destino, 'utf8');
-    const inicio = conteudo.indexOf('[');
-    const fim = conteudo.lastIndexOf(']');
-    return inicio >= 0 && fim > inicio ? JSON.parse(conteudo.slice(inicio, fim + 1)) : [];
-  } catch {
-    return [];
-  }
-}
-
-const [nomesPdf, arquivosCapa, catalogosAnteriores] = await Promise.all([
+const [nomesPdf, nomesPdfVigentes, arquivosCapa] = await Promise.all([
   readdir(pastaPdf),
+  readdir(pastaPdfVigente).catch(() => []),
   readdir(pastaCapas),
-  lerManifestoExistente()
 ]);
 
-const pdfs = await Promise.all(
-  nomesPdf
-    .filter(nome => extname(nome).toLowerCase() === '.pdf')
-    .map(async nome => ({ nome, tamanho: (await stat(join(pastaPdf, nome))).size }))
-);
+const nomesPdfVigentesNormalizados = new Set(nomesPdfVigentes.map(chave));
+const pdfsRaiz = nomesPdf
+  .filter(nome => extname(nome).toLowerCase() === '.pdf')
+  .filter(nome => !nomesPdfVigentesNormalizados.has(chave(nome)));
+const pdfsVigentes = nomesPdfVigentes
+  .filter(nome => extname(nome).toLowerCase() === '.pdf');
+const pdfs = await Promise.all([
+  ...pdfsRaiz.map(async nome => {
+    const tamanho = (await stat(join(pastaPdf, nome))).size;
+    return { nome, arquivo: nome, tamanho, status: tamanho === 0 ? 'embreve' : 'passado' };
+  }),
+  ...pdfsVigentes.map(async nome => {
+    const tamanho = (await stat(join(pastaPdfVigente, nome))).size;
+    return { nome, arquivo: `vigente/${nome}`, tamanho, status: 'atual' };
+  })
+]);
 const capas = arquivosCapa.filter(nome => extensoesDeImagem.has(extname(nome).toLowerCase()));
 const capaPorNome = new Map(capas.map(nome => [chave(semExtensao(nome)), nome]));
-const anteriorPorArquivo = new Map(catalogosAnteriores.map(item => [chave(item.arquivo), item]));
-const arquivosNovos = new Set(
-  pdfs
-    .filter(item => item.tamanho > 0 && !anteriorPorArquivo.has(chave(item.nome)))
-    .map(item => chave(item.nome))
-);
 
-const catalogos = pdfs.map(({ nome: arquivo, tamanho }) => {
-  const nomeCompleto = semExtensao(arquivo);
+const catalogos = pdfs.map(({ nome, arquivo, tamanho, status }) => {
+  const nomeCompleto = semExtensao(nome);
   const partes = nomeCompleto.match(/^(.*?)(?:\s+(\d{2}|\d{4}))?$/);
   const anoInformado = partes?.[2];
   const ano = anoInformado ? Number(anoInformado.length === 2 ? `20${anoInformado}` : anoInformado) : null;
-  const anterior = anteriorPorArquivo.get(chave(arquivo));
 
   return {
     arquivo,
     capa: capaPorNome.get(chave(nomeCompleto)) || null,
     titulo: partes?.[1]?.trim() || nomeCompleto,
     ano,
-    status: tamanho === 0 ? 'embreve' : anterior?.status === 'atual' ? 'atual' : 'passado'
+    status
   };
 });
-
-if (arquivoAtualInformado) {
-  catalogos.forEach(item => {
-    if(item.status !== 'embreve')item.status = chave(item.arquivo) === chave(arquivoAtualInformado) ? 'atual' : 'passado';
-  });
-} else if (promoverNovos && arquivosNovos.size) {
-  const novos = catalogos
-    .filter(item => arquivosNovos.has(chave(item.arquivo)))
-    .sort((a, b) => a.arquivo.localeCompare(b.arquivo, 'pt-BR'));
-  catalogos.forEach(item => { if(item.status !== 'embreve')item.status = 'passado'; });
-  novos.at(-1).status = 'atual';
-} else if (!catalogos.some(item => item.status === 'atual')) {
-  const primeiroDisponivel = catalogos.find(item => item.status !== 'embreve');
-  if(primeiroDisponivel)primeiroDisponivel.status = 'atual';
-}
 
 catalogos.sort((a, b) => {
   const ordem = { atual: 0, embreve: 1, passado: 2 };
@@ -83,7 +59,7 @@ catalogos.sort((a, b) => {
   return a.titulo.localeCompare(b.titulo, 'pt-BR');
 });
 
-const aviso = '// Arquivo gerado automaticamente. Adicione PDFs em /pdf e capas homônimas em /pdf/capas.\n';
+const aviso = '// Arquivo gerado automaticamente. PDFs em /pdf/vigente aparecem como vigentes; PDFs vazios em /pdf aparecem como em breve.\n';
 const conteudoGerado = `${aviso}window.PETIT_BISCUIT_CATALOGOS = ${JSON.stringify(catalogos, null, 2)};\n`;
 const versao = createHash('sha256').update(conteudoGerado).digest('hex').slice(0, 10);
 await writeFile(destino, conteudoGerado, 'utf8');

@@ -1,7 +1,14 @@
-// Arquivo gerado automaticamente. Adicione PDFs em /pdf e capas homônimas em /pdf/capas.
+// Arquivo gerado automaticamente. PDFs em /pdf/vigente aparecem como vigentes; PDFs vazios em /pdf aparecem como em breve.
 window.PETIT_BISCUIT_CATALOGOS = [
   {
-    "arquivo": "Dia das Crianças.pdf",
+    "arquivo": "vigente/Café da manhã.pdf",
+    "capa": "Café da manhã.png",
+    "titulo": "Café da manhã",
+    "ano": null,
+    "status": "atual"
+  },
+  {
+    "arquivo": "vigente/Dia das Crianças.pdf",
     "capa": "Dia das Crianças.jpg",
     "titulo": "Dia das Crianças",
     "ano": null,
@@ -13,13 +20,6 @@ window.PETIT_BISCUIT_CATALOGOS = [
     "titulo": "Dia do Professor",
     "ano": null,
     "status": "embreve"
-  },
-  {
-    "arquivo": "Café da manhã.pdf",
-    "capa": "Café da manhã.jpg",
-    "titulo": "Café da manhã",
-    "ano": null,
-    "status": "passado"
   },
   {
     "arquivo": "Catálogo Dia das Mães 26.pdf",

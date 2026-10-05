@@ -7,13 +7,18 @@ document.addEventListener('DOMContentLoaded',async()=>{
 
     try{
       const api='https://api.github.com/repos/1000tonBR/petitbiscuit/contents';
-      const [respostaPdf,respostaCapas]=await Promise.all([
+      const [respostaPdf,respostaVigente,respostaCapas]=await Promise.all([
         fetch(`${api}/pdf?ref=main`,{headers:{Accept:'application/vnd.github+json'}}),
+        fetch(`${api}/pdf/vigente?ref=main`,{headers:{Accept:'application/vnd.github+json'}}),
         fetch(`${api}/pdf/capas?ref=main`,{headers:{Accept:'application/vnd.github+json'}})
       ]);
-      if(!respostaPdf.ok||!respostaCapas.ok)throw new Error('Não foi possível consultar os catálogos.');
+      if(!respostaPdf.ok||!respostaVigente.ok||!respostaCapas.ok)throw new Error('Não foi possível consultar os catálogos.');
 
-      const [arquivosPdf,arquivosCapa]=await Promise.all([respostaPdf.json(),respostaCapas.json()]);
+      const [arquivosPdf,arquivosVigentes,arquivosCapa]=await Promise.all([
+        respostaPdf.json(),
+        respostaVigente.json(),
+        respostaCapas.json()
+      ]);
       const extensoesImagem=/\.(avif|bmp|gif|jpe?g|png|svg|webp)$/i;
       const chave=nome=>nome.normalize('NFC').toLocaleLowerCase('pt-BR');
       const semExtensao=nome=>nome.replace(/\.[^.]+$/,'');
@@ -22,33 +27,27 @@ document.addEventListener('DOMContentLoaded',async()=>{
           .filter(item=>item.type==='file'&&extensoesImagem.test(item.name))
           .map(item=>[chave(semExtensao(item.name)),item.name])
       );
-      const locais=new Map(catalogosLocais.map(item=>[chave(item.arquivo),item]));
-      const remotos=arquivosPdf
+      const criarCatalogoRemoto=(item,vigente)=>{
+        const nomeCompleto=semExtensao(item.name);
+        const partes=nomeCompleto.match(/^(.*?)(?:\s+(\d{2}|\d{4}))?$/);
+        const anoInformado=partes?.[2];
+        const ano=anoInformado?Number(anoInformado.length===2?`20${anoInformado}`:anoInformado):null;
+        return {
+          arquivo:vigente?`vigente/${item.name}`:item.name,
+          capa:capas.get(chave(nomeCompleto))||null,
+          titulo:partes?.[1]?.trim()||nomeCompleto,
+          ano,
+          status:vigente?'atual':item.size===0?'embreve':'passado'
+        };
+      };
+      const catalogosPorNome=new Map();
+      arquivosPdf
         .filter(item=>item.type==='file'&&/\.pdf$/i.test(item.name))
-        .map(item=>{
-          const nomeCompleto=semExtensao(item.name);
-          const partes=nomeCompleto.match(/^(.*?)(?:\s+(\d{2}|\d{4}))?$/);
-          const anoInformado=partes?.[2];
-          const ano=anoInformado?Number(anoInformado.length===2?`20${anoInformado}`:anoInformado):null;
-          return {
-            arquivo:item.name,
-            capa:capas.get(chave(nomeCompleto))||null,
-            titulo:partes?.[1]?.trim()||nomeCompleto,
-            ano,
-            status:item.size===0?'embreve':locais.get(chave(item.name))?.status==='atual'?'atual':'passado',
-            novo:item.size>0&&!locais.has(chave(item.name))
-          };
-        });
-
-      const novos=remotos.filter(item=>item.novo).sort((a,b)=>a.arquivo.localeCompare(b.arquivo,'pt-BR'));
-      if(novos.length){
-        remotos.forEach(item=>{if(item.status!=='embreve')item.status='passado';});
-        novos.at(-1).status='atual';
-      }else if(!remotos.some(item=>item.status==='atual')){
-        const primeiroDisponivel=remotos.find(item=>item.status!=='embreve');
-        if(primeiroDisponivel)primeiroDisponivel.status='atual';
-      }
-      remotos.forEach(item=>{delete item.novo;});
+        .forEach(item=>catalogosPorNome.set(chave(item.name),criarCatalogoRemoto(item,false)));
+      arquivosVigentes
+        .filter(item=>item.type==='file'&&/\.pdf$/i.test(item.name))
+        .forEach(item=>catalogosPorNome.set(chave(item.name),criarCatalogoRemoto(item,true)));
+      const remotos=[...catalogosPorNome.values()];
       const ordem={atual:0,embreve:1,passado:2};
       return remotos.sort((a,b)=>a.status!==b.status?ordem[a.status]-ordem[b.status]:a.titulo.localeCompare(b.titulo,'pt-BR'));
     }catch(erro){
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded',async()=>{
 
   const catalogos=await carregarCatalogosOnline();
 
-  const caminhoArquivo=(pasta,nome)=>`${pasta}/${encodeURIComponent(nome)}`;
+  const caminhoArquivo=(pasta,nome)=>`${pasta}/${nome.split('/').map(encodeURIComponent).join('/')}`;
   const criarCardCatalogo=catalogo=>{
     const atual=catalogo.status==='atual';
     const emBreve=catalogo.status==='embreve';
