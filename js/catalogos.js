@@ -29,13 +29,6 @@ window.PETIT_BISCUIT_CATALOGOS = [
     "status": "passado"
   },
   {
-    "arquivo": "Dia das Crianças.pdf",
-    "capa": "Dia das Crianças.jpg",
-    "titulo": "Dia das Crianças",
-    "ano": null,
-    "status": "passado"
-  },
-  {
     "arquivo": "Dia dos Pais 26.pdf",
     "capa": "Dia dos Pais 26.jpg",
     "titulo": "Dia dos Pais",
