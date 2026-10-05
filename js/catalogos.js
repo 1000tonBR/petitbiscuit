@@ -1,9 +1,9 @@
 // Arquivo gerado automaticamente. Adicione PDFs em /pdf e capas homônimas em /pdf/capas.
 window.PETIT_BISCUIT_CATALOGOS = [
   {
-    "arquivo": "Café da manhã.pdf",
-    "capa": "Café da manhã.bmp",
-    "titulo": "Café da manhã",
+    "arquivo": "Dia das Crianças.pdf",
+    "capa": "Dia das Crianças.jpg",
+    "titulo": "Dia das Crianças",
     "ano": null,
     "status": "atual"
   },
@@ -13,6 +13,13 @@ window.PETIT_BISCUIT_CATALOGOS = [
     "titulo": "Dia do Professor",
     "ano": null,
     "status": "embreve"
+  },
+  {
+    "arquivo": "Café da manhã.pdf",
+    "capa": "Café da manhã.bmp",
+    "titulo": "Café da manhã",
+    "ano": null,
+    "status": "passado"
   },
   {
     "arquivo": "Catálogo Dia das Mães 26.pdf",
