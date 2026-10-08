@@ -15,6 +15,13 @@ window.PETIT_BISCUIT_CATALOGOS = [
     "status": "atual"
   },
   {
+    "arquivo": "vigente/Dia dos Professores.pdf",
+    "capa": "Dia dos Professores.JPG",
+    "titulo": "Dia dos Professores",
+    "ano": null,
+    "status": "atual"
+  },
+  {
     "arquivo": "Catálogo Dia das Mães 26.pdf",
     "capa": "Catálogo Dia das Mães 26.png",
     "titulo": "Catálogo Dia das Mães",
@@ -33,13 +40,6 @@ window.PETIT_BISCUIT_CATALOGOS = [
     "capa": "Dia dos Pais 26.jpg",
     "titulo": "Dia dos Pais",
     "ano": 2026,
-    "status": "passado"
-  },
-  {
-    "arquivo": "Dia dos Professores.pdf",
-    "capa": "Dia dos Professores.JPG",
-    "titulo": "Dia dos Professores",
-    "ano": null,
     "status": "passado"
   }
 ];
